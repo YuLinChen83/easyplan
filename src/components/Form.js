@@ -4,11 +4,14 @@ class Form extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const { onSubmit } = this.props;
-    const formData = {};
-    for (const field in this.refs) {
-      formData[field] = this.refs[field].value || '';
-    }
-    // console.log('-->', formData);
+    const nameInput = this.nameInput.value;
+    const preferDateInput = this.preferDateInput.value;
+    const unavailableDateInput = this.unavailableDateInput.value;
+    const formData = {
+      name: nameInput,
+      preferDate: preferDateInput,
+      unavailableDate: unavailableDateInput,
+    };
     onSubmit(formData);
   }
 
@@ -19,7 +22,13 @@ class Form extends React.Component {
         <form onSubmit={e => this.handleSubmit(e)}>
           <label htmlFor="name">
             建立者
-            <select ref="name" id="name" name="name">
+            <select
+              ref={(e) => {
+                this.nameInput = e;
+              }}
+              id="name"
+              name="name"
+            >
               {plandate.userList.map(name => (
                 <option key={name} value={name}>
                   {name}
@@ -30,7 +39,9 @@ class Form extends React.Component {
           <label htmlFor="preferDate">
             優先日期
             <input
-              ref="preferDate"
+              ref={(e) => {
+                this.preferDateInput = e;
+              }}
               id="preferDate"
               name="preferDate"
               type="text"
@@ -39,7 +50,9 @@ class Form extends React.Component {
           <label htmlFor="unavailableDate">
             排除日期
             <input
-              ref="unavailableDate"
+              ref={(e) => {
+                this.unavailableDateInput = e;
+              }}
               id="unavailableDate"
               name="unavailableDate"
               type="text"
