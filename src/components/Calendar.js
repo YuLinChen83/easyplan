@@ -66,7 +66,6 @@ const CalendarCells = ({
         + day.getDate()}`;
 
       preferCount = preferDate[compositeDate];
-      console.log(preferCount);
 
       days.push(
         <div
@@ -157,7 +156,6 @@ class Calendar extends Component {
       setFilterName,
     } = this.props;
     const { preferDate, unavailableDate } = dateStatistics;
-    console.log(dateStatistics);
     const { currentMonth, selectedDate } = this.state;
     return (
       <div>

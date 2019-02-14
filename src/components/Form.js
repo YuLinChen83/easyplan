@@ -1,15 +1,20 @@
 import React from 'react';
 
 class Form extends React.Component {
-  inputName = plandate => (
+  state = {
+    inputName: '',
+    inputPreferDate: '',
+    inputUnavailableDate: '',
+  };
+
+  inputName = (plandate, inputName) => (
     <label htmlFor="name">
       建立者
       <select
-        ref={(e) => {
-          this.nameInput = e;
-        }}
         id="name"
         name="name"
+        value={inputName}
+        onChange={e => this.setState({ inputName: e.target.value })}
       >
         {plandate.userList.map(name => (
           <option key={name} value={name}>
@@ -20,30 +25,28 @@ class Form extends React.Component {
     </label>
   );
 
-  preferDate = () => (
+  preferDate = inputPreferDate => (
     <label htmlFor="preferDate">
       優先日期
       <input
-        ref={(e) => {
-          this.preferDateInput = e;
-        }}
         id="preferDate"
         name="preferDate"
         type="text"
+        value={inputPreferDate}
+        onChange={e => this.setState({ inputPreferDate: e.target.value })}
       />
     </label>
   );
 
-  unavailableDate = () => (
+  unavailableDate = inputUnavailableDate => (
     <label htmlFor="unavailableDate">
       排除日期
       <input
-        ref={(e) => {
-          this.unavailableDateInput = e;
-        }}
         id="unavailableDate"
         name="unavailableDate"
         type="text"
+        value={inputUnavailableDate}
+        onChange={e => this.setState({ inputUnavailableDate: e.target.value })}
       />
     </label>
   );
@@ -51,9 +54,10 @@ class Form extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const { onSubmit } = this.props;
-    const nameInput = this.nameInput.value;
-    const preferDateInput = this.preferDateInput.value;
-    const unavailableDateInput = this.unavailableDateInput.value;
+    const { inputName, inputPreferDate, inputUnavailableDate } = this.state;
+    const nameInput = inputName;
+    const preferDateInput = inputPreferDate;
+    const unavailableDateInput = inputUnavailableDate;
     const formData = {
       name: nameInput,
       preferDate: preferDateInput,
@@ -64,12 +68,13 @@ class Form extends React.Component {
 
   render() {
     const { plandate } = this.props;
+    const { inputName, inputPreferDate, inputUnavailableDate } = this.state;
     return (
       <div>
         <form onSubmit={e => this.handleSubmit(e)}>
-          {this.inputName(plandate)}
-          {this.preferDate()}
-          {this.unavailableDate()}
+          {this.inputName(plandate, inputName)}
+          {this.preferDate(inputPreferDate)}
+          {this.unavailableDate(inputUnavailableDate)}
           <button type="submit">提交</button>
         </form>
       </div>
