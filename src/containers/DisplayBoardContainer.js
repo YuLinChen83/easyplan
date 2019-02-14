@@ -1,17 +1,14 @@
 import { connect } from 'react-redux';
-import { setVisibilityFilter } from '../actions';
+import { setFilterName } from '../actions';
 import Calendar from '../components/Calendar';
 
-const dateStatistics = (filter, selectList) => {
-  const filterSelectList = filter !== 'ALL'
-    ? selectList.filter(item => item.name === filter)
-    : selectList;
-  let { preferDate, unavailableDate } = filterSelectList.reduce(
+const dateStatistics = (filter, selectedList) => {
+  const filterselectedList = filter !== 'ALL'
+    ? selectedList.filter(item => item.name === filter)
+    : selectedList;
+  const { preferDate, unavailableDate } = filterselectedList.reduce(
     (parentPrev, parentCur) => ({
-      preferDate: [...parentPrev.preferDate, parentCur.preferDate].reduce(
-        (prev, cur) => prev.concat(cur),
-        [],
-      ),
+      preferDate: [...parentPrev.preferDate, ...parentCur.preferDate],
       unavailableDate: [
         ...new Set(
           [...parentPrev.unavailableDate, parentCur.unavailableDate].reduce(
@@ -23,26 +20,27 @@ const dateStatistics = (filter, selectList) => {
     }),
     { preferDate: [], unavailableDate: [] },
   );
-  preferDate = preferDate.reduce((prev2, cur2) => {
+  const preferDateStatistics = preferDate.reduce((prev2, cur2) => {
     // eslint-disable-next-line no-param-reassign
     prev2[cur2] = (prev2[cur2] || 0) + 1;
     // eslint-enable
     return prev2;
   }, {});
-  return { preferDate, unavailableDate };
+  const finalDateStatistics = {
+    preferDate: preferDateStatistics,
+    unavailableDate,
+  };
+  return finalDateStatistics;
 };
 const mapStateToProps = state => ({
-  plandate: state.plandate,
-  dateStatistics: dateStatistics(
-    state.plandate.visibilityFilter,
-    state.plandate.selectList,
-  ),
-  userList: state.plandate.userList,
-  visibilityFilter: state.plandate.visibilityFilter,
+  plandate: state,
+  dateStatistics: dateStatistics(state.filterByName, state.selectedList),
+  userList: state.userList,
+  filterByName: state.filterByName,
 });
 
 const mapDispatchToProps = dispatch => ({
-  setVisibilityFilter: filter => dispatch(setVisibilityFilter(filter)),
+  setFilterName: filter => dispatch(setFilterName(filter)),
 });
 
 export default connect(

@@ -3,7 +3,7 @@ import { submitData } from '../actions';
 import Form from '../components/Form';
 
 const mapStateToProps = state => ({
-  plandate: state.plandate,
+  plandate: state,
 });
 
 const mapDispatchToProps = dispatch => ({

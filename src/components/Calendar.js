@@ -66,6 +66,7 @@ const CalendarCells = ({
         + day.getDate()}`;
 
       preferCount = preferDate[compositeDate];
+      console.log(preferCount);
 
       days.push(
         <div
@@ -84,8 +85,8 @@ const CalendarCells = ({
           onClick={() => onDateClick(dateFns.parse(cloneDay))}
         >
           <div className="statistics">
-            {preferCount ? '可以人數' : ''}
-            {preferCount}
+            {preferCount ? `可以人數${preferCount}` : ''}
+
             {unavailableDate.indexOf(compositeDate) !== -1 ? (
               <span className="unavailableMark">（有人不行）</span>
             ) : (
@@ -108,12 +109,9 @@ const CalendarCells = ({
   return <div className="body">{rows}</div>;
 };
 
-const NameFilter = ({ userList, visibilityFilter, setVisibilityFilter }) => (
+const NameFilter = ({ userList, filterByName, setFilterName }) => (
   <div className="nameFilter">
-    <select
-      value={visibilityFilter}
-      onChange={e => setVisibilityFilter(e.target.value)}
-    >
+    <select value={filterByName} onChange={e => setFilterName(e.target.value)}>
       <option value="ALL">顯示全部</option>
       {userList.map(name => (
         <option key={name} value={name}>
@@ -155,8 +153,8 @@ class Calendar extends Component {
       plandate,
       dateStatistics,
       userList,
-      visibilityFilter,
-      setVisibilityFilter,
+      filterByName,
+      setFilterName,
     } = this.props;
     const { preferDate, unavailableDate } = dateStatistics;
     console.log(dateStatistics);
@@ -165,8 +163,8 @@ class Calendar extends Component {
       <div>
         <NameFilter
           userList={userList}
-          visibilityFilter={visibilityFilter}
-          setVisibilityFilter={setVisibilityFilter}
+          filterByName={filterByName}
+          setFilterName={setFilterName}
         />
         <div className="calendar">
           <CalendarHeader

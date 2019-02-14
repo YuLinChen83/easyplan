@@ -1,6 +1,53 @@
 import React from 'react';
 
 class Form extends React.Component {
+  inputName = plandate => (
+    <label htmlFor="name">
+      建立者
+      <select
+        ref={(e) => {
+          this.nameInput = e;
+        }}
+        id="name"
+        name="name"
+      >
+        {plandate.userList.map(name => (
+          <option key={name} value={name}>
+            {name}
+          </option>
+        ))}
+      </select>
+    </label>
+  );
+
+  preferDate = () => (
+    <label htmlFor="preferDate">
+      優先日期
+      <input
+        ref={(e) => {
+          this.preferDateInput = e;
+        }}
+        id="preferDate"
+        name="preferDate"
+        type="text"
+      />
+    </label>
+  );
+
+  unavailableDate = () => (
+    <label htmlFor="unavailableDate">
+      排除日期
+      <input
+        ref={(e) => {
+          this.unavailableDateInput = e;
+        }}
+        id="unavailableDate"
+        name="unavailableDate"
+        type="text"
+      />
+    </label>
+  );
+
   handleSubmit(e) {
     e.preventDefault();
     const { onSubmit } = this.props;
@@ -20,44 +67,9 @@ class Form extends React.Component {
     return (
       <div>
         <form onSubmit={e => this.handleSubmit(e)}>
-          <label htmlFor="name">
-            建立者
-            <select
-              ref={(e) => {
-                this.nameInput = e;
-              }}
-              id="name"
-              name="name"
-            >
-              {plandate.userList.map(name => (
-                <option key={name} value={name}>
-                  {name}
-                </option>
-              ))}
-            </select>
-          </label>
-          <label htmlFor="preferDate">
-            優先日期
-            <input
-              ref={(e) => {
-                this.preferDateInput = e;
-              }}
-              id="preferDate"
-              name="preferDate"
-              type="text"
-            />
-          </label>
-          <label htmlFor="unavailableDate">
-            排除日期
-            <input
-              ref={(e) => {
-                this.unavailableDateInput = e;
-              }}
-              id="unavailableDate"
-              name="unavailableDate"
-              type="text"
-            />
-          </label>
+          {this.inputName(plandate)}
+          {this.preferDate()}
+          {this.unavailableDate()}
           <button type="submit">提交</button>
         </form>
       </div>
