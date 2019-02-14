@@ -2,7 +2,7 @@ import React from 'react';
 
 class Form extends React.Component {
   state = {
-    inputName: '',
+    inputName: 'Tiffany',
     inputPreferDate: '',
     inputUnavailableDate: '',
   };

@@ -149,7 +149,6 @@ class Calendar extends Component {
 
   render() {
     const {
-      plandate,
       dateStatistics,
       userList,
       filterByName,
@@ -179,8 +178,6 @@ class Calendar extends Component {
             unavailableDate={unavailableDate}
           />
         </div>
-        {JSON.stringify(plandate)}
-        <hr />
       </div>
     );
   }

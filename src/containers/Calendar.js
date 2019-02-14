@@ -33,7 +33,6 @@ const dateStatistics = (filter, selectedList) => {
   return finalDateStatistics;
 };
 const mapStateToProps = state => ({
-  plandate: state,
   dateStatistics: dateStatistics(state.filterByName, state.selectedList),
   userList: state.userList,
   filterByName: state.filterByName,

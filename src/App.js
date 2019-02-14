@@ -1,11 +1,11 @@
 import React from 'react';
-import DisplayBoardContainer from './containers/DisplayBoardContainer';
-import FormContainer from './containers/FormContainer';
+import Calendar from './containers/Calendar';
+import Form from './containers/Form';
 
 const App = () => (
   <div>
-    <FormContainer />
-    <DisplayBoardContainer />
+    <Form />
+    <Calendar />
   </div>
 );
 
