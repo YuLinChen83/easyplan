@@ -2,19 +2,29 @@ import React, { Component } from 'react';
 import dateFns from 'date-fns';
 import './Calendar.css';
 
-const CalendarHeader = ({ currentMonth, prevMonth, nextMonth }) => {
+export const CalendarHeader = ({ currentMonth, prevMonth, nextMonth }) => {
   const dateFormat = 'MMMM YYYY';
   return (
     <div className="header row flex-middle">
       <div className="col col-start">
-        <div role="presentation" className="icon" onClick={prevMonth}>
+        <div
+          id="prevMonth"
+          role="presentation"
+          className="icon"
+          onClick={prevMonth}
+        >
           chevron_left
         </div>
       </div>
       <div className="col col-center">
         <span>{dateFns.format(currentMonth, dateFormat)}</span>
       </div>
-      <div role="presentation" className="col col-end" onClick={nextMonth}>
+      <div
+        id="nextMonth"
+        role="presentation"
+        className="col col-end"
+        onClick={nextMonth}
+      >
         <div className="icon">chevron_right</div>
       </div>
     </div>
@@ -35,7 +45,7 @@ const CalendarDays = ({ currentMonth }) => {
 
   return <div className="days row">{days}</div>;
 };
-const CalendarCells = ({
+export const CalendarCells = ({
   currentMonth,
   selectedDate,
   onDateClick,
@@ -70,7 +80,7 @@ const CalendarCells = ({
       days.push(
         <div
           role="presentation"
-          className={`col cell ${
+          className={`dateDiv col cell ${
             // eslint-disable-next-line no-nested-ternary
             !dateFns.isSameMonth(day, monthStart)
               ? 'disabled'
@@ -108,9 +118,13 @@ const CalendarCells = ({
   return <div className="body">{rows}</div>;
 };
 
-const NameFilter = ({ userList, filterByName, setFilterName }) => (
-  <div className="nameFilter">
-    <select value={filterByName} onChange={e => setFilterName(e.target.value)}>
+export const NameFilter = ({ userList, filterByName, setFilterName }) => (
+  <div>
+    <select
+      id="nameFilter"
+      value={filterByName}
+      onChange={e => setFilterName(e.target.value)}
+    >
       <option value="ALL">顯示全部</option>
       {userList.map(name => (
         <option key={name} value={name}>
@@ -122,10 +136,14 @@ const NameFilter = ({ userList, filterByName, setFilterName }) => (
 );
 
 class Calendar extends Component {
-  state = {
-    currentMonth: new Date(),
-    selectedDate: new Date(),
-  };
+  constructor() {
+    super();
+    const mockDate = new Date();
+    this.state = {
+      currentMonth: mockDate.getDay(),
+      selectedDate: mockDate.getDay(),
+    };
+  }
 
   onDateClick = (day) => {
     this.setState({

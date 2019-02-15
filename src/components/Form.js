@@ -70,14 +70,12 @@ class Form extends React.Component {
     const { plandate } = this.props;
     const { inputName, inputPreferDate, inputUnavailableDate } = this.state;
     return (
-      <div>
-        <form onSubmit={e => this.handleSubmit(e)}>
-          {this.inputName(plandate, inputName)}
-          {this.preferDate(inputPreferDate)}
-          {this.unavailableDate(inputUnavailableDate)}
-          <button type="submit">提交</button>
-        </form>
-      </div>
+      <form onSubmit={e => this.handleSubmit(e)}>
+        {this.inputName(plandate, inputName)}
+        {this.preferDate(inputPreferDate)}
+        {this.unavailableDate(inputUnavailableDate)}
+        <button type="submit">提交</button>
+      </form>
     );
   }
 }
