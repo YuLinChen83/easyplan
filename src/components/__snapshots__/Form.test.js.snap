@@ -1,0 +1,607 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Form /> render renders without crashing 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <Form
+    onSubmit={[MockFunction]}
+    plandate={
+      Object {
+        "filterByName": "ALL",
+        "selectedList": Array [
+          Object {
+            "name": "Tiffany",
+            "preferDate": Array [
+              "2019-02-18",
+              "2019-02-21",
+              "2019-02-28",
+            ],
+            "unavailableDate": Array [
+              "2019-02-10",
+              "2019-02-14",
+            ],
+          },
+          Object {
+            "name": "Sara",
+            "preferDate": Array [
+              "2019-02-15",
+              "2019-02-17",
+              "2019-02-28",
+            ],
+            "unavailableDate": Array [
+              "2019-02-18",
+              "2019-02-14",
+              "2019-02-27",
+            ],
+          },
+        ],
+        "userList": Array [
+          "Tiffany",
+          "Sara",
+          "Tyler",
+        ],
+      }
+    }
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "checkPropTypes": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": Array [
+        <label
+          htmlFor="name"
+        >
+          建立者
+          <select
+            id="name"
+            name="name"
+            onChange={[Function]}
+            value="Tiffany"
+          >
+            <option
+              value="Tiffany"
+            >
+              Tiffany
+            </option>
+            <option
+              value="Sara"
+            >
+              Sara
+            </option>
+            <option
+              value="Tyler"
+            >
+              Tyler
+            </option>
+          </select>
+        </label>,
+        <label
+          htmlFor="preferDate"
+        >
+          優先日期
+          <input
+            id="preferDate"
+            name="preferDate"
+            onChange={[Function]}
+            type="text"
+            value=""
+          />
+        </label>,
+        <label
+          htmlFor="unavailableDate"
+        >
+          排除日期
+          <input
+            id="unavailableDate"
+            name="unavailableDate"
+            onChange={[Function]}
+            type="text"
+            value=""
+          />
+        </label>,
+        <button
+          type="submit"
+        >
+          提交
+        </button>,
+      ],
+      "onSubmit": [Function],
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            "建立者",
+            <select
+              id="name"
+              name="name"
+              onChange={[Function]}
+              value="Tiffany"
+            >
+              <option
+                value="Tiffany"
+              >
+                Tiffany
+              </option>
+              <option
+                value="Sara"
+              >
+                Sara
+              </option>
+              <option
+                value="Tyler"
+              >
+                Tyler
+              </option>
+            </select>,
+          ],
+          "htmlFor": "name",
+        },
+        "ref": null,
+        "rendered": Array [
+          "建立者",
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <option
+                  value="Tiffany"
+                >
+                  Tiffany
+                </option>,
+                <option
+                  value="Sara"
+                >
+                  Sara
+                </option>,
+                <option
+                  value="Tyler"
+                >
+                  Tyler
+                </option>,
+              ],
+              "id": "name",
+              "name": "name",
+              "onChange": [Function],
+              "value": "Tiffany",
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": "Tiffany",
+                "nodeType": "host",
+                "props": Object {
+                  "children": "Tiffany",
+                  "value": "Tiffany",
+                },
+                "ref": null,
+                "rendered": "Tiffany",
+                "type": "option",
+              },
+              Object {
+                "instance": null,
+                "key": "Sara",
+                "nodeType": "host",
+                "props": Object {
+                  "children": "Sara",
+                  "value": "Sara",
+                },
+                "ref": null,
+                "rendered": "Sara",
+                "type": "option",
+              },
+              Object {
+                "instance": null,
+                "key": "Tyler",
+                "nodeType": "host",
+                "props": Object {
+                  "children": "Tyler",
+                  "value": "Tyler",
+                },
+                "ref": null,
+                "rendered": "Tyler",
+                "type": "option",
+              },
+            ],
+            "type": "select",
+          },
+        ],
+        "type": "label",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            "優先日期",
+            <input
+              id="preferDate"
+              name="preferDate"
+              onChange={[Function]}
+              type="text"
+              value=""
+            />,
+          ],
+          "htmlFor": "preferDate",
+        },
+        "ref": null,
+        "rendered": Array [
+          "優先日期",
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "id": "preferDate",
+              "name": "preferDate",
+              "onChange": [Function],
+              "type": "text",
+              "value": "",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": "input",
+          },
+        ],
+        "type": "label",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            "排除日期",
+            <input
+              id="unavailableDate"
+              name="unavailableDate"
+              onChange={[Function]}
+              type="text"
+              value=""
+            />,
+          ],
+          "htmlFor": "unavailableDate",
+        },
+        "ref": null,
+        "rendered": Array [
+          "排除日期",
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "id": "unavailableDate",
+              "name": "unavailableDate",
+              "onChange": [Function],
+              "type": "text",
+              "value": "",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": "input",
+          },
+        ],
+        "type": "label",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": "提交",
+          "type": "submit",
+        },
+        "ref": null,
+        "rendered": "提交",
+        "type": "button",
+      },
+    ],
+    "type": "form",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <label
+            htmlFor="name"
+          >
+            建立者
+            <select
+              id="name"
+              name="name"
+              onChange={[Function]}
+              value="Tiffany"
+            >
+              <option
+                value="Tiffany"
+              >
+                Tiffany
+              </option>
+              <option
+                value="Sara"
+              >
+                Sara
+              </option>
+              <option
+                value="Tyler"
+              >
+                Tyler
+              </option>
+            </select>
+          </label>,
+          <label
+            htmlFor="preferDate"
+          >
+            優先日期
+            <input
+              id="preferDate"
+              name="preferDate"
+              onChange={[Function]}
+              type="text"
+              value=""
+            />
+          </label>,
+          <label
+            htmlFor="unavailableDate"
+          >
+            排除日期
+            <input
+              id="unavailableDate"
+              name="unavailableDate"
+              onChange={[Function]}
+              type="text"
+              value=""
+            />
+          </label>,
+          <button
+            type="submit"
+          >
+            提交
+          </button>,
+        ],
+        "onSubmit": [Function],
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              "建立者",
+              <select
+                id="name"
+                name="name"
+                onChange={[Function]}
+                value="Tiffany"
+              >
+                <option
+                  value="Tiffany"
+                >
+                  Tiffany
+                </option>
+                <option
+                  value="Sara"
+                >
+                  Sara
+                </option>
+                <option
+                  value="Tyler"
+                >
+                  Tyler
+                </option>
+              </select>,
+            ],
+            "htmlFor": "name",
+          },
+          "ref": null,
+          "rendered": Array [
+            "建立者",
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  <option
+                    value="Tiffany"
+                  >
+                    Tiffany
+                  </option>,
+                  <option
+                    value="Sara"
+                  >
+                    Sara
+                  </option>,
+                  <option
+                    value="Tyler"
+                  >
+                    Tyler
+                  </option>,
+                ],
+                "id": "name",
+                "name": "name",
+                "onChange": [Function],
+                "value": "Tiffany",
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": "Tiffany",
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": "Tiffany",
+                    "value": "Tiffany",
+                  },
+                  "ref": null,
+                  "rendered": "Tiffany",
+                  "type": "option",
+                },
+                Object {
+                  "instance": null,
+                  "key": "Sara",
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": "Sara",
+                    "value": "Sara",
+                  },
+                  "ref": null,
+                  "rendered": "Sara",
+                  "type": "option",
+                },
+                Object {
+                  "instance": null,
+                  "key": "Tyler",
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": "Tyler",
+                    "value": "Tyler",
+                  },
+                  "ref": null,
+                  "rendered": "Tyler",
+                  "type": "option",
+                },
+              ],
+              "type": "select",
+            },
+          ],
+          "type": "label",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              "優先日期",
+              <input
+                id="preferDate"
+                name="preferDate"
+                onChange={[Function]}
+                type="text"
+                value=""
+              />,
+            ],
+            "htmlFor": "preferDate",
+          },
+          "ref": null,
+          "rendered": Array [
+            "優先日期",
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "id": "preferDate",
+                "name": "preferDate",
+                "onChange": [Function],
+                "type": "text",
+                "value": "",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "input",
+            },
+          ],
+          "type": "label",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              "排除日期",
+              <input
+                id="unavailableDate"
+                name="unavailableDate"
+                onChange={[Function]}
+                type="text"
+                value=""
+              />,
+            ],
+            "htmlFor": "unavailableDate",
+          },
+          "ref": null,
+          "rendered": Array [
+            "排除日期",
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "id": "unavailableDate",
+                "name": "unavailableDate",
+                "onChange": [Function],
+                "type": "text",
+                "value": "",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "input",
+            },
+          ],
+          "type": "label",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "提交",
+            "type": "submit",
+          },
+          "ref": null,
+          "rendered": "提交",
+          "type": "button",
+        },
+      ],
+      "type": "form",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "legacyContextMode": "parent",
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getChildContext": Object {
+            "calledByRenderer": false,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+  },
+}
+`;

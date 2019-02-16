@@ -10,12 +10,10 @@ const dateStatistics = (filter, selectedList) => {
     (parentPrev, parentCur) => ({
       preferDate: [...parentPrev.preferDate, ...parentCur.preferDate],
       unavailableDate: [
-        ...new Set(
-          [...parentPrev.unavailableDate, parentCur.unavailableDate].reduce(
-            (prev, cur) => prev.concat(cur),
-            [],
-          ),
-        ),
+        ...new Set([
+          ...parentPrev.unavailableDate,
+          ...parentCur.unavailableDate,
+        ]),
       ],
     }),
     { preferDate: [], unavailableDate: [] },
