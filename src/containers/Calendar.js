@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { setFilterName } from '../actions';
+import { setFilterName, updateByDate } from '../actions';
 import Calendar from '../components/Calendar';
 
 const dateStatistics = (filter, selectedList) => {
@@ -38,6 +38,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   setFilterName: filter => dispatch(setFilterName(filter)),
+  updateByDate: (dateType, selectedDate) => dispatch(updateByDate(dateType, selectedDate)),
 });
 
 export default connect(

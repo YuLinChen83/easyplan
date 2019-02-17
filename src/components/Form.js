@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
 
 class Form extends React.Component {
   state = {
-    inputName: 'Tiffany',
-    inputPreferDate: '',
-    inputUnavailableDate: '',
+    inputName: "Tiffany",
+    inputPreferDate: "",
+    inputUnavailableDate: ""
   };
 
   inputName = (plandate, inputName) => (
@@ -61,7 +61,7 @@ class Form extends React.Component {
     const formData = {
       name: nameInput,
       preferDate: preferDateInput,
-      unavailableDate: unavailableDateInput,
+      unavailableDate: unavailableDateInput
     };
     onSubmit(formData);
   }

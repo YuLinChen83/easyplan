@@ -1,0 +1,41 @@
+input[type="text"],
+select {
+  height: 30px;
+  font-size: 1em;
+}
+select {
+  background: #fff;
+  border: 1px solid #eee;
+  color: #888;
+  font-weight: lighter;
+}
+input[type="button"],
+input[type="submit"],
+button {
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  font-size: 1em;
+  height: 30px;
+
+  border: 1px solid #eee;
+  background-color: #eee;
+  color: #878787;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-weight: lighter;
+}
+input[type="button"],
+input[type="submit"],
+button:hover {
+  border: 1px solid #eee;
+  background-color: white;
+  color: #878787;
+}
+button:disabled,
+button[disabled] {
+  cursor: not-allowed;
+  background-color: #ccc;
+  color: #eee;
+  border: 1px solid #ccc;
+}

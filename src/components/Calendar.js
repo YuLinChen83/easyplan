@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React, { Component } from 'react';
 import dateFns from 'date-fns';
 import './Calendar.css';
@@ -47,10 +48,11 @@ const CalendarDays = ({ currentMonth }) => {
 };
 export const CalendarCells = ({
   currentMonth,
-  selectedDate,
-  onDateClick,
   preferDate,
   unavailableDate,
+  filterByName,
+  isEditing,
+  updateByDate,
 }) => {
   const monthStart = dateFns.startOfMonth(currentMonth);
   const monthEnd = dateFns.endOfMonth(monthStart);
@@ -68,7 +70,6 @@ export const CalendarCells = ({
   while (day <= endDate) {
     for (let i = 0; i < 7; i += 1) {
       formattedDate = dateFns.format(day, dateFormat);
-      const cloneDay = day;
       const compositeDate = `${day.getFullYear()}-${(day.getMonth() + 1 < 10
         ? '0'
         : '')
@@ -81,23 +82,60 @@ export const CalendarCells = ({
         <div
           role="presentation"
           className={`dateDiv col cell ${
-            // eslint-disable-next-line no-nested-ternary
             !dateFns.isSameMonth(day, monthStart)
               ? 'disabled'
-              : dateFns.isSameDay(day, selectedDate)
-                ? 'selected'
+              : isEditing.status
+                ? 'pointer'
                 : ''
           } 
-        ${compositeDate in preferDate ? 'prefer' : ''}
+        ${
+          compositeDate in preferDate
+            ? `${
+              isEditing.status
+                ? isEditing.dateType === 'preferDate'
+                  ? ' choicePrefer'
+                  : ''
+                : 'prefer'
+            }`
+            : ''
+        }
+        ${
+          isEditing.status && isEditing.dateType === 'unavailableDate'
+            ? unavailableDate.some(date => date === compositeDate)
+              ? ' choiceUnavailableDate'
+              : ''
+            : ''
+        }
           `}
           key={day}
-          onClick={() => onDateClick(dateFns.parse(cloneDay))}
+          onClick={() => (isEditing.status
+            ? updateByDate(isEditing.dateType, compositeDate)
+            : false)
+          }
         >
           <div className="statistics">
-            {preferCount ? `可以人數${preferCount}` : ''}
+            {preferCount
+              ? isEditing.status
+                ? isEditing.dateType === 'preferDate'
+                  ? '已選'
+                  : '☆'
+                : filterByName === 'ALL'
+                  ? `可出席人數${preferCount}`
+                  : '☆'
+              : ''}
 
             {unavailableDate.indexOf(compositeDate) !== -1 ? (
-              <span className="unavailableMark">（有人不行）</span>
+              isEditing.status ? (
+                isEditing.dateType === 'unavailableDate' ? (
+                  '已選'
+                ) : (
+                  '✕'
+                )
+              ) : (
+                <span className="unavailableMark">
+                  {filterByName === 'ALL' ? '（有人這天不行）' : '✕'}
+                </span>
+              )
             ) : (
               ''
             )}
@@ -119,37 +157,74 @@ export const CalendarCells = ({
 };
 
 export const NameFilter = ({ userList, filterByName, setFilterName }) => (
-  <div>
-    <select
-      id="nameFilter"
-      value={filterByName}
-      onChange={e => setFilterName(e.target.value)}
+  <select
+    id="nameFilter"
+    value={filterByName}
+    onChange={e => setFilterName(e.target.value)}
+  >
+    <option value="ALL">顯示全部</option>
+    {userList.map(name => (
+      <option key={name} value={name}>
+        {name}
+      </option>
+    ))}
+  </select>
+);
+
+export const EditDateByName = ({
+  filterByName,
+  isEditing,
+  onEditClick,
+  setFilterName,
+}) => (
+  <React.Fragment>
+    <button
+      id="editPrefer"
+      type="button"
+      disabled={isEditing.status}
+      onClick={() => onEditClick('preferDate')}
     >
-      <option value="ALL">顯示全部</option>
-      {userList.map(name => (
-        <option key={name} value={name}>
-          {name}
-        </option>
-      ))}
-    </select>
-  </div>
+      編輯可以的時間
+    </button>
+    <button
+      id="editUnavailable"
+      type="button"
+      disabled={isEditing.status}
+      onClick={() => onEditClick('unavailableDate')}
+    >
+      編輯不可以的時間
+    </button>
+    <span id="editHint">
+      {isEditing.status
+        ? `正在編輯 ${filterByName} ${
+          isEditing.dateType === 'preferDate' ? '可以優先' : '無法'
+        }出席的日期`
+        : ''}
+    </span>
+    {!isEditing.status ? (
+      <button
+        style={{ float: 'right' }}
+        type="button"
+        onClick={() => setFilterName('ALL')}
+      >
+        顯示結果
+      </button>
+    ) : (
+      ''
+    )}
+  </React.Fragment>
 );
 
 class Calendar extends Component {
   constructor() {
     super();
-    const mockDate = new Date();
+    const today = new Date();
     this.state = {
-      currentMonth: mockDate,
-      selectedDate: mockDate,
+      isEditing: { status: false },
+      currentMonth: today,
+      selectedDate: today,
     };
   }
-
-  onDateClick = (day) => {
-    this.setState({
-      selectedDate: day,
-    });
-  };
 
   nextMonth = () => {
     const { currentMonth } = this.state;
@@ -165,22 +240,45 @@ class Calendar extends Component {
     });
   };
 
+  onEditClick = (editDateType) => {
+    const isEditing = editDateType
+      ? { status: true, dateType: editDateType }
+      : { status: false };
+    this.setState({
+      isEditing,
+    });
+  };
+
   render() {
     const {
       dateStatistics,
       userList,
       filterByName,
       setFilterName,
+      updateByDate,
     } = this.props;
     const { preferDate, unavailableDate } = dateStatistics;
-    const { currentMonth, selectedDate } = this.state;
+    const { currentMonth, selectedDate, isEditing } = this.state;
     return (
       <div>
-        <NameFilter
-          userList={userList}
-          filterByName={filterByName}
-          setFilterName={setFilterName}
-        />
+        <div id="filterBox">
+          <span>篩選</span>
+          <NameFilter
+            userList={userList}
+            filterByName={filterByName}
+            setFilterName={setFilterName}
+          />
+          {filterByName !== 'ALL' ? (
+            <EditDateByName
+              filterByName={filterByName}
+              isEditing={isEditing}
+              onEditClick={this.onEditClick}
+              setFilterName={setFilterName}
+            />
+          ) : (
+            ''
+          )}
+        </div>
         <div className="calendar">
           <CalendarHeader
             currentMonth={currentMonth}
@@ -191,11 +289,24 @@ class Calendar extends Component {
           <CalendarCells
             currentMonth={currentMonth}
             selectedDate={selectedDate}
-            onDateClick={this.onDateClick}
             preferDate={preferDate}
             unavailableDate={unavailableDate}
+            filterByName={filterByName}
+            isEditing={isEditing}
+            updateByDate={updateByDate}
           />
         </div>
+        {isEditing.status ? (
+          <button
+            className="editComplete"
+            type="button"
+            onClick={() => this.onEditClick()}
+          >
+            完成編輯
+          </button>
+        ) : (
+          ''
+        )}
       </div>
     );
   }

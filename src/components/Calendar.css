@@ -161,7 +161,6 @@ main {
   height: 5em;
   border-right: 1px solid var(--border-color);
   overflow: hidden;
-  cursor: pointer;
   background: var(--neutral-color);
   transition: 0.25s ease-out;
 }
@@ -203,6 +202,57 @@ main {
   pointer-events: none;
 }
 
+.dateDiv.col.cell.pointer {
+  cursor: pointer;
+  /* background: rgb(243, 255, 241); */
+}
+.col.cell.prefer {
+  background-color: #fcf2c1;
+  color: black;
+}
+.col.cell.choicePrefer {
+  background: rgb(243, 255, 241);
+}
+.col.cell.choiceUnavailableDate {
+  background: rgb(255, 221, 220);
+}
+.statistics {
+  text-align: center;
+}
+.choicePrefer .statistics {
+  color: rgb(27, 158, 114);
+}
+.choiceUnavailableDate .statistics {
+  color: rgb(185, 77, 77);
+}
+#editPrefer,
+#editUnavailable {
+  color: white;
+}
+#editPrefer {
+  background: rgb(121, 167, 113);
+}
+#editUnavailable {
+  background: rgb(231, 147, 144);
+}
+#editPrefer:hover {
+  color: rgb(121, 167, 113);
+  background: white;
+  border: 1px solid rgb(121, 167, 113);
+}
+#editUnavailable:hover {
+  color: rgb(231, 147, 144);
+  background: white;
+  border: 1px solid rgb(231, 147, 144);
+}
+#editPrefer:disabled,
+#editUnavailable:disabled {
+  cursor: not-allowed;
+  background-color: #ccc;
+  color: #eee;
+  border: 1px solid white;
+}
+
 .calendar .body .cell .bg {
   font-weight: 700;
   line-height: 1;
@@ -228,10 +278,6 @@ main {
   width: calc(100% / 7);
 }
 
-.col.cell.prefer {
-  background-color: #fcf2c1;
-  color: black;
-}
 .unavailableMark {
   font-size: x-small;
   color: rgb(206, 63, 63);
@@ -239,8 +285,12 @@ main {
 .statistics {
   line-height: 5em;
 }
-.nameFilter {
-  position: fixed;
-  top: 0;
-  right: 0;
+#filterBox {
+  padding: 10px 0;
+}
+.editComplete {
+  float: right;
+}
+#editHint {
+  float: right;
 }

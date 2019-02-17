@@ -1,6 +1,6 @@
 const initState = {
   userList: ['Tiffany', 'Sara', 'Tyler'],
-  filterByName: 'ALL',
+  filterByName: 'Tyler',
   selectedList: [
     {
       name: 'Tiffany',
@@ -18,6 +18,9 @@ const DateStrToArr = str => str.split(',').map(item => item.trim());
 
 const plandateReducer = (state = initState, action) => {
   let newSelectedList;
+  let selectedDate;
+  let dateType;
+  let userSelectedData;
   switch (action.type) {
     case 'INPUT_DATE':
       if (
@@ -41,6 +44,43 @@ const plandateReducer = (state = initState, action) => {
             unavailableDate: DateStrToArr(action.inputData.unavailableDate),
           },
         ];
+      }
+      return {
+        ...state,
+        selectedList: newSelectedList,
+      };
+    case 'UPDATE_SINGLE_DATE': // toggle
+      ({ selectedDate, dateType } = action.payload);
+      // 此人還沒選過日期 先新增此人空 data
+      if (
+        state.selectedList.filter(item => item.name === state.filterByName)
+          .length === 0
+      ) {
+        newSelectedList = [
+          ...state.selectedList,
+          { name: state.filterByName, preferDate: [], unavailableDate: [] },
+        ];
+      } else {
+        newSelectedList = state.selectedList;
+      }
+      userSelectedData = newSelectedList.filter(
+        item => item.name === state.filterByName,
+      );
+      if (userSelectedData[0][dateType].indexOf(selectedDate) === -1) {
+        // 此人選的日期中該日期不存在 新增
+        newSelectedList = newSelectedList.map(item => (item.name === state.filterByName
+          ? { ...item, [dateType]: [...item[dateType], selectedDate] }
+          : item));
+      } else {
+        // 此人選的日期中該日期存在 移除
+        newSelectedList = newSelectedList.map(item => (item.name === state.filterByName
+          ? {
+            ...item,
+            [dateType]: item[dateType].filter(
+              date => date !== selectedDate,
+            ),
+          }
+          : item));
       }
       return {
         ...state,
